@@ -79,7 +79,6 @@ class Instagram():
             "Sec-Fetch-Site": "same-site",
             "TE": "trailers"
             }
-        self.name = self.get_user_name(username)
 
     def ipaddr(self) -> str:
         return self.session.get("https://httpbin.org/ip").json()["origin"]
@@ -126,13 +125,6 @@ class Instagram():
             "TE": "trailers",
         }
 
-    def get_user_name(self,username):
-        head = self.get_universal_headers()
-        return BeautifulSoup(
-                self.session.get(f"https://instagram.com/{username}",headers=head).content, 
-                'html.parser'
-        ).title.string
-
     def login(self,password) -> bool:
         if self.use_tor is not None:
             self.session.proxies = self.use_tor.proxy()
@@ -144,11 +136,11 @@ class Instagram():
             'optIntoOneTap': 'false'
         }
         self.session.cookies.clear()
-        head_post = self.get_uni_headers()
+        head_post = self.get_universal_headers()
         print(self.session.post(url,data = data,headers=head_post).text)
         return False
 
-#tor = Tor(9876,4949)
-#tor.start()
-ig = Instagram("tdynamos.linux",use_tor=None)
-print(ig.name)
+tor = Tor(9876,4949)
+tor.start()
+ig = Instagram("tdynamos.linux",use_tor=tor)
+ig.login("sometest")
