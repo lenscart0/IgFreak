@@ -1,16 +1,33 @@
-May 05 22:09:39.318 [notice] Tor 0.4.7.13 running on Linux with Libevent 2.1.12-stable, OpenSSL 3.0.8, Zlib 1.2.13, Liblzma 5.4.2, Libzstd 1.5.5 and Glibc 2.37 as libc.
-May 05 22:09:39.318 [notice] Tor can't help you if you use it wrong! Learn how to be safe at https://support.torproject.org/faq/staying-anonymous/
-May 05 22:09:39.318 [warn] Tor was compiled with zstd 1.5.4, but is running with zstd 1.5.5. For safety, we'll avoid using advanced zstd functionality.
-May 05 22:09:39.318 [notice] Read configuration file "/home/tdynamos/IgFreak/.torrc".
-May 05 22:09:39.322 [warn] ControlPort is open, but no authentication method has been configured.  This means that any program on your computer can reconfigure your Tor.  That's bad!  You should upgrade your Tor controller as soon as possible.
-May 05 22:09:39.326 [notice] Opening Socks listener on 127.0.0.1:9050
-May 05 22:09:39.326 [notice] Opened Socks listener connection (ready) on 127.0.0.1:9050
-May 05 22:09:39.326 [notice] Opening HTTP tunnel listener on 127.0.0.1:4949
-May 05 22:09:39.326 [notice] Opened HTTP tunnel listener connection (ready) on 127.0.0.1:4949
-May 05 22:09:39.326 [notice] Opening Control listener on 127.0.0.1:9876
-May 05 22:09:39.326 [notice] Opened Control listener connection (ready) on 127.0.0.1:9876
-May 05 22:09:39.000 [notice] Parsing GEOIP IPv4 file /usr/share/tor/geoip.
-May 05 22:09:39.000 [notice] Parsing GEOIP IPv6 file /usr/share/tor/geoip6.
-May 05 22:09:40.000 [notice] Bootstrapped 0% (starting): Starting
-May 05 22:09:41.000 [notice] Starting with guard context "default"
-May 05 22:09:41.000 [notice] Interrupt: exiting cleanly.
+May 27 13:47:59.776 [notice] Tor 0.4.7.13 running on Linux with Libevent 2.1.12-stable, OpenSSL 3.0.8, Zlib 1.2.13, Liblzma 5.4.3, Libzstd 1.5.5 and Glibc 2.37 as libc.
+May 27 13:47:59.776 [notice] Tor can't help you if you use it wrong! Learn how to be safe at https://support.torproject.org/faq/staying-anonymous/
+May 27 13:47:59.776 [warn] Tor was compiled with zstd 1.5.4, but is running with zstd 1.5.5. For safety, we'll avoid using advanced zstd functionality.
+May 27 13:47:59.776 [notice] Read configuration file "/home/tdynamos/IgFreak/.torrc".
+May 27 13:47:59.790 [warn] ControlPort is open, but no authentication method has been configured.  This means that any program on your computer can reconfigure your Tor.  That's bad!  You should upgrade your Tor controller as soon as possible.
+May 27 13:47:59.802 [notice] Opening Socks listener on 127.0.0.1:9050
+May 27 13:47:59.802 [notice] Opened Socks listener connection (ready) on 127.0.0.1:9050
+May 27 13:47:59.802 [notice] Opening HTTP tunnel listener on 127.0.0.1:4949
+May 27 13:47:59.802 [notice] Opened HTTP tunnel listener connection (ready) on 127.0.0.1:4949
+May 27 13:47:59.802 [notice] Opening Control listener on 127.0.0.1:9876
+May 27 13:47:59.802 [notice] Opened Control listener connection (ready) on 127.0.0.1:9876
+May 27 13:47:59.000 [warn] It looks like another Tor process is running with the same data directory.  Waiting 5 seconds to see if it goes away.
+May 27 13:48:04.000 [notice] Parsing GEOIP IPv4 file /usr/share/tor/geoip.
+May 27 13:48:05.000 [notice] Parsing GEOIP IPv6 file /usr/share/tor/geoip6.
+May 27 13:48:06.000 [notice] Bootstrapped 0% (starting): Starting
+May 27 13:48:08.000 [notice] Starting with guard context "default"
+May 27 13:48:09.000 [notice] Bootstrapped 5% (conn): Connecting to a relay
+May 27 13:48:09.000 [notice] Bootstrapped 10% (conn_done): Connected to a relay
+May 27 13:48:09.000 [notice] Bootstrapped 14% (handshake): Handshaking with a relay
+May 27 13:48:11.000 [notice] Bootstrapped 15% (handshake_done): Handshake with a relay done
+May 27 13:48:11.000 [notice] Bootstrapped 75% (enough_dirinfo): Loaded enough directory info to build circuits
+May 27 13:48:11.000 [notice] Bootstrapped 90% (ap_handshake_done): Handshake finished with a relay to build circuits
+May 27 13:48:11.000 [notice] Bootstrapped 95% (circuit_create): Establishing a Tor circuit
+May 27 13:48:15.000 [notice] Bootstrapped 100% (done): Done
+May 27 13:48:15.000 [notice] New control connection opened from 127.0.0.1.
+May 27 13:48:29.000 [notice] New control connection opened from 127.0.0.1.
+May 27 13:48:35.000 [notice] New control connection opened from 127.0.0.1.
+May 27 13:48:35.000 [notice] Rate limiting NEWNYM request: delaying by 4 second(s)
+May 27 13:48:42.000 [notice] New control connection opened from 127.0.0.1.
+May 27 13:48:42.000 [notice] Rate limiting NEWNYM request: delaying by 7 second(s)
+May 27 13:48:49.000 [notice] New control connection opened from 127.0.0.1.
+May 27 13:48:49.000 [notice] Rate limiting NEWNYM request: delaying by 10 second(s)
+May 27 13:49:04.000 [notice] Interrupt: exiting cleanly.
