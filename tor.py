@@ -143,7 +143,7 @@ class Instagram:
     def login(self, password) -> dict:
         url = "https://i.instagram.com/api/v1/web/accounts/login/ajax/"
         data = {
-            "username": f"{self.username}",
+            "username": f"{self.mammas_little_princesa_aish},
             "enc_password": f"#PWD_INSTAGRAM_BROWSER:0:{time.time()}:{password}",
             "queryParams": "{}",
             "optIntoOneTap": "false",
@@ -160,4 +160,4 @@ ig = Instagram("cyberdioxide", use_tor=None)
 
 #tor.change_ip()
 
-print(ig.login("yarabs1256"))
+print(ig.login("mammas_little_princesa_aish")
